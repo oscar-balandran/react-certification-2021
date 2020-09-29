@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography, Paper } from '@material-ui/core/';
 
@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   addButton: {
     color: theme.palette.secondary.light,
+    margin: theme.spacing(1),
   },
 }));
 
@@ -55,14 +56,13 @@ const VideoInfoOps = (props) => {
                 <Typography variant="h6">{props.video.snippet.title}</Typography>
               </Grid>
               <Grid item xs={4}>
-                <IconButton
-                  theme={classes}
-                  aria-label="Favourites"
-                  size="medium"
+                <Button
+                  className={classes.addButton}
                   onClick={() => handleAddFavourites(props.video)}
+                  startIcon={<AddIcon />}
                 >
-                  <AddIcon />
-                </IconButton>
+                  Favourites
+                </Button>
               </Grid>
             </Grid>
           </Grid>
