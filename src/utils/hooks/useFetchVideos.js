@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-
+import { useState, useEffect, useContext } from 'react';
+import VideosContext from '../../state/VideosContext';
 import { API_KEY, API_URL_SEARCH } from '../apiYoutube';
 
-const maxResults = 2;
+const maxResults = 10;
 const part = 'snippet,id';
 const type = 'video';
 
@@ -15,14 +15,15 @@ const url = `${API_URL_SEARCH}?part=${part}&maxResults=${maxResults}&type=${type
  *
  */
 
-const useFetchVideos = (strSearch = '') => {
+const useFetchVideos = () => {
+  const { strSearch } = useContext(VideosContext);
   const urlSearch = `${url}&q=${strSearch}`;
-  const options = {};
 
   // save a response if any
   const [response, setResponse] = useState(null);
   // setting an error
   const [error, setError] = useState(null);
+  const [options] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,7 +37,7 @@ const useFetchVideos = (strSearch = '') => {
     };
 
     fetchData();
-  }, []);
+  }, [urlSearch, options]);
   return { response, error };
 };
 

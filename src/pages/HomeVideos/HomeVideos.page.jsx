@@ -4,10 +4,10 @@ import VideosList from '../../components/VideosList';
 import VideosContext from '../../state/VideosContext';
 import { useFetchVideos } from '../../utils/hooks/useFetchVideos';
 
-const HomeVideos = () => {
-  const { videoList, strSearch, setVideoList } = useContext(VideosContext);
+const VideosContent = () => {
+  const { videoList, setVideoList } = useContext(VideosContext);
 
-  const res = useFetchVideos(strSearch);
+  const res = useFetchVideos();
 
   let tmpVideos = null;
   if (!res.response) {
@@ -18,10 +18,15 @@ const HomeVideos = () => {
 
   setVideoList(tmpVideos);
 
+  return <VideosList title="Welcome to React Challenge!!!" list={videoList} />;
+};
+
+const HomeVideos = () => {
   return (
     <>
-      <HeaderBar />
-      <VideosList title="Welcome to React Challenge!!!" list={videoList} />
+      <HeaderBar>
+        <VideosContent />
+      </HeaderBar>
     </>
   );
 };

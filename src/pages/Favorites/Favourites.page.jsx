@@ -6,13 +6,12 @@ import VideosContext from '../../state/VideosContext';
 const Favourites = () => {
   const { favouritesList } = useContext(VideosContext);
 
-  console.log('Favourites:', favouritesList);
-
   return (
     <>
       <div>
-        <HeaderBar />
-        <VideosList title="My Favourites!!!" list={favouritesList} />
+        <HeaderBar>
+          <VideosList title="My Favourites!!!" list={favouritesList} />
+        </HeaderBar>
       </div>
     </>
   );

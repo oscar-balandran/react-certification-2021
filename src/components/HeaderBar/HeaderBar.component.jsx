@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HeaderBar = () => {
+const HeaderBar = (props) => {
   const classes = useStyles();
 
   const { strSearch, setStrSearch } = useContext(VideosContext);
@@ -134,7 +134,7 @@ const HeaderBar = () => {
               <SearchIcon />
             </div>
             <InputBase
-              placeholder="Search…"
+              placeholder={strSearch || 'Search…'}
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
@@ -165,6 +165,7 @@ const HeaderBar = () => {
         handleClose={hideLogin}
         handleOk={handleAccount}
       />
+      {props.children}
     </div>
   );
 };
