@@ -1,8 +1,7 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import { Typography, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -11,28 +10,45 @@ import { useFetchRelatedVideos } from '../../utils/hooks/useFetchVideos';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    width: 300,
+    height: '100%',
+    flexDirection: 'column',
+    width: '90%',
     alignContent: 'right',
+    paddingTop: '5px',
   },
   details: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
   },
-  content: {
-    flex: '1 0 auto',
-  },
-  cover: {
-    width: 151,
-  },
-  controls: {
+  gridContainer: {
     display: 'flex',
-    alignItems: 'center',
-    paddingLeft: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
+    flexDirection: 'column',
+    margin: theme.spacing(0),
+    flexGrow: 1,
+    maxHeight: '100%',
+    minHeight: '100%',
+    maxWidth: '100%',
+    flexBasis: '100%',
+    overflowY: 'auto',
   },
-  playIcon: {
-    height: 38,
-    width: 38,
+  card: {
+    height: 100,
+    margin: '30px auto 50px',
+    maxWidth: 400,
+    overflow: 'visible',
+    padding: '0px',
+  },
+  cardContent: {
+    paddingBottom: '5px',
+  },
+  cardMedia: {
+    margin: '-70px auto 0',
+    width: '80%',
+    height: 100,
+    borderRadius: '4px',
+    boxShadow: '0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)',
+    position: 'relative',
+    zIndex: 1,
   },
 }));
 
@@ -47,35 +63,34 @@ const RelatedVideosPanel = (props) => {
 
   const relatedVideoList = res.response.items;
 
-  console.log('RelatedVideosPanel.relatedVideos', relatedVideoList);
-
-  // video.id.videoId
-  // video.snippet.title
-  // video.snippet.description
-
   return (
     <>
       <div className={classes.root}>
-        <List>
+        <Grid
+          container
+          spacing={1}
+          direction="column"
+          justify="center"
+          alignItems="stretch"
+          className={classes.gridContainer}
+        >
           {relatedVideoList.map((video) => (
-            <ListItem key={video.id.videoId}>
-              <Card className={classes.root}>
+            <Grid item xs zeroMinWidth key={video.id.videoId}>
+              <Card className={classes.card}>
                 <div className={classes.details}>
                   <CardMedia
-                    className={classes.cover}
+                    className={classes.cardMedia}
                     image={video.snippet.thumbnails.default.url}
                     title={video.snippet.title}
                   />
-                  <CardContent className={classes.content}>
-                    <Typography component="h3" variant="h5">
-                      {video.snippet.title}
-                    </Typography>
+                  <CardContent className={classes.cardContent}>
+                    <Typography variant="body2">{video.snippet.title}</Typography>
                   </CardContent>
                 </div>
               </Card>
-            </ListItem>
+            </Grid>
           ))}
-        </List>
+        </Grid>
       </div>
     </>
   );

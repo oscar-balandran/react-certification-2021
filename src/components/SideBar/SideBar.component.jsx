@@ -21,14 +21,11 @@ const SideBar = (props) => {
 
   const classes = useStyles();
 
-  const [setShowPanel] = React.useState(false);
-
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-    setShowPanel(open);
-    props.setSideBarOpen(open);
+    props.handleClose(open);
   };
 
   const list = (anchor_) => (

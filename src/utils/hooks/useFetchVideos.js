@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { API_KEY, API_URL_SEARCH } from '../apiYoutube';
 
-const maxResults = 10;
+const maxResults = 2;
 const part = 'snippet,id';
 const type = 'video';
 
@@ -36,7 +36,7 @@ const useFetchVideos = (strSearch = '') => {
     };
 
     fetchData();
-  }, [url]);
+  }, []);
   return { response, error };
 };
 
@@ -61,7 +61,7 @@ const useFetchRelatedVideos = (videoId) => {
     };
 
     fetchData();
-  }, [url]);
+  }, []);
   return { response, error };
 };
 

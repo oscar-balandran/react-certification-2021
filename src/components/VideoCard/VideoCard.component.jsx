@@ -11,6 +11,16 @@ import {
 import VideosContext from '../../state/VideosContext';
 
 const useStyles = makeStyles(() => ({
+  card: {
+    height: 450,
+    margin: '30px auto 50px',
+    maxWidth: 345,
+    overflow: 'hidden',
+    padding: '0px',
+  },
+  cardContent: {
+    paddingBottom: '50px',
+  },
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
@@ -20,13 +30,11 @@ const useStyles = makeStyles(() => ({
 const VideoCard = (props) => {
   const classes = useStyles();
 
-  const { selectedVideo, setSelectedVideo } = useContext(VideosContext);
-
-  console.log('VideoCard', selectedVideo);
+  const { setSelectedVideo } = useContext(VideosContext);
 
   return (
-    <div key={props.key}>
-      <Card>
+    <>
+      <Card className={classes.card}>
         <CardActionArea
           component={Link}
           to="/video"
@@ -37,18 +45,18 @@ const VideoCard = (props) => {
             image={props.video.snippet.thumbnails.medium.url}
             onClick={() => setSelectedVideo(props.video)}
           />
-          <CardContent>
-            <Typography theme={classes} variant="h5">
+          <CardContent className={classes.cardContent}>
+            <Typography color="textPrimary" variant="h5">
               {props.video.snippet.title}
             </Typography>
             <hr />
-            <Typography theme={classes} paragraph>
+            <Typography paragraph variant="body2">
               {props.video.snippet.description}
             </Typography>
           </CardContent>
         </CardActionArea>
       </Card>
-    </div>
+    </>
   );
 };
 

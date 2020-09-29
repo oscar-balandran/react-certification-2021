@@ -1,12 +1,7 @@
-import React, { useContext } from 'react';
-
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core/';
-
 import VideoCard from '../VideoCard';
-import VideosContext from '../../state/VideosContext';
-
-import { useFetchVideos } from '../../utils/hooks/useFetchVideos';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,35 +10,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const VideosList = () => {
+const VideosList = (props) => {
   const classes = useStyles();
 
-  const { videoList, strSearch, setVideoList } = useContext(VideosContext);
-
-  console.log(`VideoList Search: ${strSearch}`);
-
-  const res = useFetchVideos(strSearch);
-
-  if (!res.response) {
+  if (!props.list) {
     return <div>Loading...</div>;
   }
-
-  setVideoList(res.response.items);
 
   return (
     <>
       <div className={classes.root}>
         <div>
-          <h3 className={classes.h2}>Welcome to React Challenge</h3>
+          <h3 className={classes.h2}>{props.title}</h3>
         </div>
         <Grid
           container
           spacing={2}
           direction="row"
           justify="flex-start"
-          alignItems="flex-start"
+          alignItems="stretch"
         >
-          {videoList.map((video) => (
+          {props.list.map((video) => (
             <Grid item xs={12} sm={6} md={3} key={video.id.videoId}>
               <VideoCard video={video} />
             </Grid>

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import AuthProvider from '../../providers/Auth';
 import HomeVideosPage from '../../pages/HomeVideos';
+import Favourites from '../../pages/Favorites';
 import LoginPage from '../../pages/Login';
 import NotFound from '../../pages/NotFound';
 import SecretPage from '../../pages/Secret';
@@ -11,31 +11,14 @@ import Private from '../Private';
 import Layout from '../Layout';
 import VideoDetail from '../../pages/VideoDetail';
 import VideosContext from '../../state/VideosContext';
-
+import ProtectedRoute from '../ProtectedRoute';
 import { theme1 } from './theme';
 
 const theme = createMuiTheme(theme1);
 
 function App() {
-  // useLayoutEffect(() => {
-  //   const { body } = document;
-
-  //   function rotateBackground() {
-  //     const xPercent = random(100);
-  //     const yPercent = random(100);
-  //     body.style.setProperty('--bg-position', `${xPercent}% ${yPercent}%`);
-  //   }
-
-  //   const intervalId = setInterval(rotateBackground, 3000);
-  //   body.addEventListener('click', rotateBackground);
-
-  //   return () => {
-  //     clearInterval(intervalId);
-  //     body.removeEventListener('click', rotateBackground);
-  //   };
-  // }, []);
-
-  const [videoList, setVideoList] = useState([]);
+  const [videoList, setVideoList] = useState(null);
+  const [favouritesList, setFavouritesList] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [strSearch, setStrSearch] = useState('Wizeline');
 
@@ -48,9 +31,11 @@ function App() {
               selectedVideo,
               videoList,
               strSearch,
+              favouritesList,
               setSelectedVideo,
               setVideoList,
               setStrSearch,
+              setFavouritesList,
             }}
           >
             <Layout>
@@ -61,6 +46,7 @@ function App() {
                 <Route exact path="/videos">
                   <HomeVideosPage />
                 </Route>
+                <ProtectedRoute path="/favourites" component={Favourites} />
                 <Route exact path="/video">
                   <VideoDetail />
                 </Route>
@@ -74,7 +60,6 @@ function App() {
                   <NotFound />
                 </Route>
               </Switch>
-              {/* <Fortune /> */}
             </Layout>
           </VideosContext.Provider>
         </AuthProvider>

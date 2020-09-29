@@ -6,9 +6,10 @@ import IconButton from '@material-ui/core/IconButton';
 import InputBase from '@material-ui/core/InputBase';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import VideosContext from '../../state/VideosContext';
 import SideBar from '../SideBar/SideBar.component';
+import { useAuth } from '../../providers/Auth';
+import LoginModal from '../LoginModal/LoginModal.component';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -77,14 +78,34 @@ const useStyles = makeStyles((theme) => ({
 const HeaderBar = () => {
   const classes = useStyles();
 
-  const { setStrSearch } = useContext(VideosContext);
+  const { strSearch, setStrSearch } = useContext(VideosContext);
+  const { authenticated } = useAuth();
 
   const [sideBarOpen, setSideBarOpen] = React.useState(false);
+  const [loginModalOpen, setLoginModalOpen] = React.useState(false);
+  const [accountImg, setAccountImg] = React.useState('anom_icon.png');
+  const [altImg, setAltImg] = React.useState('Anonymous account');
 
   const isSideBarOpen = Boolean(sideBarOpen);
+  const isLoginModalOpen = Boolean(loginModalOpen);
 
   const handleSideBarButton = (open) => {
     setSideBarOpen(open);
+  };
+
+  const showLogin = () => {
+    console.log('Authenticated?:', authenticated);
+
+    if (!authenticated) {
+      setLoginModalOpen(true);
+    }
+  };
+  const hideLogin = () => {
+    setLoginModalOpen(false);
+  };
+  const handleAccount = () => {
+    setAccountImg('wize_icon.jpg');
+    setAltImg('Wizeline account!!');
   };
 
   const handleSearchKeyPress = (event) => {
@@ -120,22 +141,30 @@ const HeaderBar = () => {
               }}
               inputProps={{ 'aria-label': 'search' }}
               onKeyPress={handleSearchKeyPress}
-            />
+            >
+              {strSearch}
+            </InputBase>
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton
               edge="end"
-              aria-label="account of current user"
+              aria-label="User Login"
               aria-haspopup="true"
               color="inherit"
+              onClick={showLogin}
             >
-              <AccountCircle />
+              <img src={accountImg} alt={altImg} />
             </IconButton>
           </div>
         </Toolbar>
       </AppBar>
-      <SideBar open={isSideBarOpen} setSideBarOpen={setSideBarOpen} />
+      <SideBar open={isSideBarOpen} handleClose={setSideBarOpen} />
+      <LoginModal
+        open={isLoginModalOpen}
+        handleClose={hideLogin}
+        handleOk={handleAccount}
+      />
     </div>
   );
 };

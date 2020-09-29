@@ -1,25 +1,12 @@
-const { blue, red } = require('@material-ui/core/colors');
-
-const headingStyles = {
-  fontFamily: ["'Helvetica Neue'", 'Helvetica', 'sans-serif'].toString(),
-  fontWeight: 700,
-};
+const { blue, indigo } = require('@material-ui/core/colors');
 
 const theme1 = {
   palette: {
-    primary: blue,
-    secondary: red,
+    primary: indigo, // blue
+    secondary: blue, // red
   },
   typography: {
-    fontFamily: ["'Fira Mono'", 'Menlo', 'monospace'].toString(),
-    h1: headingStyles,
-    h2: headingStyles,
-    h3: headingStyles,
-    h4: headingStyles,
-    h5: headingStyles,
-    h6: {
-      fontWeight: 400,
-    },
+    fontFamily: ['Roboto', 'sans-serif'].toString(),
     overline: {
       fontSize: '0.875rem',
       fontWeight: 500,
@@ -28,6 +15,8 @@ const theme1 = {
     button: {
       fontWeight: 500,
     },
+    gutterBottom: true,
+    paragraph: true,
   },
   shape: {
     borderRadius: 6,

@@ -23,9 +23,16 @@ function AuthProvider({ children }) {
     setAuthenticated(isAuthenticated);
   }, []);
 
-  const login = useCallback(() => {
-    setAuthenticated(true);
-    storage.set(AUTH_STORAGE_KEY, true);
+  const login = useCallback((u, p) => {
+    console.log(`U:${u} P:${p}`);
+    if (u === 'usr1' && p === 'wize2020') {
+      setAuthenticated(true);
+      storage.set(AUTH_STORAGE_KEY, true);
+
+      return true;
+    }
+    console.log('Login Failed!!!');
+    return false;
   }, []);
 
   const logout = useCallback(() => {
