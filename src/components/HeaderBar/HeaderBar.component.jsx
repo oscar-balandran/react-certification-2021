@@ -3,6 +3,7 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
+import Avatar from '@material-ui/core/Avatar';
 import InputBase from '@material-ui/core/InputBase';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
@@ -83,11 +84,24 @@ const HeaderBar = (props) => {
 
   const [sideBarOpen, setSideBarOpen] = React.useState(false);
   const [loginModalOpen, setLoginModalOpen] = React.useState(false);
-  const [accountImg, setAccountImg] = React.useState('anom_icon.png');
-  const [altImg, setAltImg] = React.useState('Anonymous account');
+
+  let avatarProps = { img: '', altImg: '' };
 
   const isSideBarOpen = Boolean(sideBarOpen);
   const isLoginModalOpen = Boolean(loginModalOpen);
+
+  const setAvatarLoggedIn = () => {
+    avatarProps = { img: 'wize_icon.jpg', altImg: 'Wizeline account!!' };
+  };
+  const setAvatarLoggedOut = () => {
+    avatarProps = { img: 'anom_icon.png', altImg: 'Anonymous account' };
+  };
+
+  if (authenticated) {
+    setAvatarLoggedIn();
+  } else {
+    setAvatarLoggedOut();
+  }
 
   const handleSideBarButton = (open) => {
     setSideBarOpen(open);
@@ -104,8 +118,7 @@ const HeaderBar = (props) => {
     setLoginModalOpen(false);
   };
   const handleAccount = () => {
-    setAccountImg('wize_icon.jpg');
-    setAltImg('Wizeline account!!');
+    setAvatarLoggedIn();
   };
 
   const handleSearchKeyPress = (event) => {
@@ -154,7 +167,8 @@ const HeaderBar = (props) => {
               color="inherit"
               onClick={showLogin}
             >
-              <img src={accountImg} alt={altImg} />
+              {/* <img src={accountImg} alt={altImg} /> */}
+              <Avatar alt={avatarProps.altImg} src={avatarProps.img} />
             </IconButton>
           </div>
         </Toolbar>

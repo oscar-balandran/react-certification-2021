@@ -6,8 +6,6 @@ import HomeVideosPage from '../../pages/HomeVideos';
 import Favourites from '../../pages/Favorites';
 import LoginPage from '../../pages/Login';
 import NotFound from '../../pages/NotFound';
-import SecretPage from '../../pages/Secret';
-import Private from '../Private';
 import Layout from '../Layout';
 import VideoDetail from '../../pages/VideoDetail';
 import VideosContext from '../../state/VideosContext';
@@ -53,9 +51,6 @@ function App() {
                 <Route exact path="/login">
                   <LoginPage />
                 </Route>
-                <Private exact path="/secret">
-                  <SecretPage />
-                </Private>
                 <Route path="*">
                   <NotFound />
                 </Route>
