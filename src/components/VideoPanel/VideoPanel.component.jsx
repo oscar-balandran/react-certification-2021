@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid } from '@material-ui/core/';
 import VideoPlayer from '../VideoPlayer/VideoPlayer.component';
-import VideoInfoOps from '../VideoInfoOps/VideoInfoOps.component';
+import VideoInfoSection from '../VideoInfoSection/VideoInfoSection.component';
 import useStyles from './VideoPanel.styles';
 
 const VideoPanel = (props) => {
@@ -14,7 +14,7 @@ const VideoPanel = (props) => {
           <VideoPlayer video={props.video} />
         </Grid>
         <Grid item xs={4} className={classes.noScroll}>
-          <VideoInfoOps video={props.video} />
+          <VideoInfoSection video={props.video} />
         </Grid>
       </Grid>
     </>

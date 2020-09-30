@@ -13,15 +13,15 @@ const LoginModal = (props) => {
 
   const { login } = useAuth();
 
-  const showError = (msg) => {
+  const showErrorMessage = (msg) => {
     setMessage({ color: 'error', msg });
   };
 
-  const showOk = (msg) => {
+  const showOkMessage = (msg) => {
     setMessage({ color: 'primary', msg });
   };
 
-  const cleanMsg = () => {
+  const cleanMessage = () => {
     if (message) {
       setMessage({ color: null, msg: null });
     }
@@ -29,7 +29,7 @@ const LoginModal = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    cleanMsg();
+    cleanMessage();
 
     const { usrInput, pwdInput } = event.target.elements;
     const usr = usrInput.value;
@@ -38,18 +38,17 @@ const LoginModal = (props) => {
     const res = login(usr, pwd);
 
     if (res) {
-      props.handleOk();
-      showOk('Login succesful!!');
+      props.handleSuccessfulLogin();
+      showOkMessage('Login succesful!!');
       setTimeout(props.handleClose, 3000);
     } else {
-      showError('Review your credentials!!!');
+      showErrorMessage('Review your credentials!!!');
     }
   };
 
   const cancel = (event) => {
     event.preventDefault();
-    cleanMsg();
-    console.log('Modal.OnClose');
+    cleanMessage();
     props.handleClose();
   };
 

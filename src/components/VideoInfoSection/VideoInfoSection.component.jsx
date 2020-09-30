@@ -3,9 +3,9 @@ import Button from '@material-ui/core/Button';
 import { Grid, Typography, Paper } from '@material-ui/core/';
 import AddIcon from '@material-ui/icons/Add';
 import VideosContext from '../../state/VideosContext';
-import useStyles from './VideoInfoOps.styles';
+import useStyles from './VideoInfoSection.styles';
 
-const VideoInfoOps = (props) => {
+const VideoInfoSection = (props) => {
   const classes = useStyles();
 
   const { favouritesList, setFavouritesList } = useContext(VideosContext);
@@ -43,4 +43,4 @@ const VideoInfoOps = (props) => {
   );
 };
 
-export default VideoInfoOps;
+export default VideoInfoSection;

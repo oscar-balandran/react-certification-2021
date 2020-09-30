@@ -21,10 +21,7 @@ const HeaderBar = (props) => {
   const [sideBarOpen, setSideBarOpen] = React.useState(false);
   const [loginModalOpen, setLoginModalOpen] = React.useState(false);
 
-  let avatarProps = { img: '', altImg: '' };
-
-  const isSideBarOpen = Boolean(sideBarOpen);
-  const isLoginModalOpen = Boolean(loginModalOpen);
+  let avatarProps = {};
 
   const setAvatarLoggedIn = () => {
     avatarProps = { img: 'wize_icon.jpg', altImg: 'Wizeline account!!' };
@@ -59,9 +56,9 @@ const HeaderBar = (props) => {
 
   const handleSearchKeyPress = (event) => {
     if (event.key === 'Enter') {
-      const str = event.target.value;
-      console.log(`Looking for: ${str}`);
-      setStrSearch(str);
+      const typedString = event.target.value;
+      console.log(`Looking for: ${typedString}`);
+      setStrSearch(typedString);
     }
   };
 
@@ -103,17 +100,16 @@ const HeaderBar = (props) => {
               color="inherit"
               onClick={showLogin}
             >
-              {/* <img src={accountImg} alt={altImg} /> */}
               <Avatar alt={avatarProps.altImg} src={avatarProps.img} />
             </IconButton>
           </div>
         </Toolbar>
       </AppBar>
-      <SideBar open={isSideBarOpen} handleClose={setSideBarOpen} />
+      <SideBar open={sideBarOpen} handleClose={setSideBarOpen} />
       <LoginModal
-        open={isLoginModalOpen}
+        open={loginModalOpen}
         handleClose={hideLogin}
-        handleOk={handleAccount}
+        handleSuccessfulLogin={handleAccount}
       />
       {props.children}
     </div>

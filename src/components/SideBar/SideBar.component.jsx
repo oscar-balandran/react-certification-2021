@@ -19,10 +19,10 @@ const SideBar = (props) => {
     props.handleClose(open);
   };
 
-  const list = (anchor_) => (
+  const MenuList = (anchorToDrawIn) => (
     <div
       className={clsx(classes.list, {
-        [classes.fullList]: anchor_ === 'top' || anchor_ === 'bottom',
+        [classes.fullList]: anchorToDrawIn === 'top' || anchorToDrawIn === 'bottom',
       })}
       role="presentation"
       onClick={toggleDrawer(false)}
@@ -45,7 +45,7 @@ const SideBar = (props) => {
     <div>
       <React.Fragment key={anchor}>
         <Drawer anchor={anchor} open={props.open} onClose={toggleDrawer(anchor, false)}>
-          {list(anchor)}
+          {MenuList(anchor)}
         </Drawer>
       </React.Fragment>
     </div>
