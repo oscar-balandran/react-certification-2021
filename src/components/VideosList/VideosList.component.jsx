@@ -1,14 +1,7 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core/';
 import VideoCard from '../VideoCard';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    padding: theme.spacing(2),
-  },
-}));
+import useStyles from './VideoList.styles';
 
 const VideosList = (props) => {
   const classes = useStyles();

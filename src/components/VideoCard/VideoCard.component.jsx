@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
 import {
   Card,
   CardActionArea,
@@ -9,23 +8,7 @@ import {
   Typography,
 } from '@material-ui/core/';
 import VideosContext from '../../state/VideosContext';
-
-const useStyles = makeStyles(() => ({
-  card: {
-    height: 450,
-    margin: '30px auto 50px',
-    maxWidth: 345,
-    overflow: 'hidden',
-    padding: '0px',
-  },
-  cardContent: {
-    paddingBottom: '50px',
-  },
-  media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
-  },
-}));
+import useStyles from './VideoCard.styles';
 
 const VideoCard = (props) => {
   const classes = useStyles();

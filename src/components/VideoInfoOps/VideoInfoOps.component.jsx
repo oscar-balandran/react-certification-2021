@@ -1,41 +1,9 @@
 import React, { useContext } from 'react';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography, Paper } from '@material-ui/core/';
-
 import AddIcon from '@material-ui/icons/Add';
 import VideosContext from '../../state/VideosContext';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignContent: 'left',
-    height: '100%',
-    width: '90%',
-    paddingTop: '5px',
-  },
-  containerGral: {
-    spacing: 0,
-  },
-  paper: {
-    display: 'flex',
-    flexDirection: 'column',
-    color: theme.palette.text.secondary,
-    alignContent: 'space-between',
-    alignItems: 'center',
-  },
-  containerTitle: {
-    flexDirection: 'row',
-    alignContent: 'space-between',
-    alignItems: 'space-between',
-    justify: 'space-between',
-  },
-  addButton: {
-    color: theme.palette.secondary.light,
-    margin: theme.spacing(1),
-  },
-}));
+import useStyles from './VideoInfoOps.styles';
 
 const VideoInfoOps = (props) => {
   const classes = useStyles();
