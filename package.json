@@ -21,10 +21,13 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
+    "test:coverage": "npm run test -- --coverage --watchAll=false",
     "eject": "react-scripts eject",
     "lint": "eslint ./src --ext .js,.jsx",
-    "lint:fix": "eslint ./src --ext .js,.jsx --fix"
+    "lint:fix": "eslint ./src --ext .js,.jsx --fix",
+    "deploy": "firebase deploy",
+    "deploy:full": "yarn build && firebase deploy"
   },
   "devDependencies": {
     "eslint-config-airbnb": "^18.2.0",
@@ -38,7 +41,9 @@
     "husky": "^4.2.5",
     "lint-staged": "^10.2.13",
     "prettier": "^2.1.1",
-    "pretty-quick": "^3.0.0"
+    "pretty-quick": "^3.0.0",
+    "jest-environment-jsdom-sixteen": "^1.0.3",
+    "jest-fetch-mock": "^3.0.3"
   },
   "browserslist": {
     "production": [
@@ -63,5 +68,12 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/src/serviceWorker.js",
+      "/src/index.js"
+    ]
   }
 }

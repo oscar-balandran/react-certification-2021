@@ -1,5 +1,4 @@
 const VideosReducer = (state, action) => {
-  console.log('VideosReducer', state, action);
   switch (action.type) {
     case 'SET_FAVOURITESLIST': {
       return { ...state, favouritesList: action.payload };
@@ -35,7 +34,6 @@ const VideosReducer = (state, action) => {
       const videoList = state.videoList.filter(
         (video) => video.id.videoId !== action.payload.video.id.videoId
       );
-      console.log('VideosReducer.REMOVE_VIDEO', videoList);
       return {
         ...state,
         videoList,

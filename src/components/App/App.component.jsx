@@ -16,7 +16,6 @@ import { theme1 } from './theme';
 const theme = createMuiTheme(theme1);
 
 function App() {
-
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [strSearch, setStrSearch] = useState('Wizeline');
 

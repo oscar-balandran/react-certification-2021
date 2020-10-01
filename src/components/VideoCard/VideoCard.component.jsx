@@ -22,7 +22,6 @@ const VideoCard = (props) => {
     event.stopPropagation();
     event.preventDefault();
 
-    console.log('VideoCard.OnDelete:', video);
     dispatch({
       type: 'REMOVE_VIDEO',
       payload: { video },
