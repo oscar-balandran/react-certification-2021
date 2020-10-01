@@ -35,15 +35,13 @@ const SideBar = (props) => {
           <ListItemText primary="Home" />
         </ListItem>
 
-        {
-          (authenticated)?(
-            <ListItem button key="Favourites" component={Link} to="/favourites">
-              <ListItemText primary="Favorites" />
-            </ListItem>
-          ):(
-            <></>
-          )
-        }
+        {authenticated ? (
+          <ListItem button key="Favourites" component={Link} to="/favourites">
+            <ListItemText primary="Favorites" />
+          </ListItem>
+        ) : (
+          <></>
+        )}
       </List>
     </div>
   );

@@ -2,13 +2,13 @@ import React from 'react';
 
 const VideosContext = React.createContext({
   selectedVideo: null,
-  videoList: [],
+  // videoList: [],
   strSearch: '',
-  favoritesList: [],
+  // favoritesList: [],
   setSelectedVideo: () => {},
-  setVideoList: () => {},
+  // setVideoList: () => {},
   setStrSearch: () => {},
-  setFavouritesList: () => {},
+  // setFavouritesList: () => {},
 });
 
 export default VideosContext;

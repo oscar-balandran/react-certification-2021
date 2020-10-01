@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import AuthProvider from '../../providers/Auth';
@@ -9,16 +9,21 @@ import NotFound from '../../pages/NotFound';
 import Layout from '../Layout';
 import VideoDetail from '../../pages/VideoDetail';
 import VideosContext from '../../state/VideosContext';
+import VideosReducer from '../../state/VideosListReducer';
 import ProtectedRoute from '../ProtectedRoute';
 import { theme1 } from './theme';
 
 const theme = createMuiTheme(theme1);
 
 function App() {
-  const [videoList, setVideoList] = useState(null);
-  const [favouritesList, setFavouritesList] = useState([]);
+
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [strSearch, setStrSearch] = useState('Wizeline');
+
+  const [state, dispatch] = useReducer(VideosReducer, {
+    videoList: [],
+    favouritesList: [],
+  });
 
   return (
     <MuiThemeProvider theme={theme}>
@@ -27,13 +32,11 @@ function App() {
           <VideosContext.Provider
             value={{
               selectedVideo,
-              videoList,
               strSearch,
-              favouritesList,
               setSelectedVideo,
-              setVideoList,
               setStrSearch,
-              setFavouritesList,
+              state,
+              dispatch,
             }}
           >
             <Layout>

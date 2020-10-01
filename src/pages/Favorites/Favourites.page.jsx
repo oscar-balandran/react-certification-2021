@@ -4,13 +4,14 @@ import VideosList from '../../components/VideosList/VideosList.component';
 import VideosContext from '../../state/VideosContext';
 
 const Favourites = () => {
-  const { favouritesList } = useContext(VideosContext);
+  // const { favouritesList } = useContext(VideosContext);
+  const { state } = useContext(VideosContext);
 
   return (
     <>
       <div>
         <HeaderBar>
-          <VideosList title="My Favourites!!!" list={favouritesList} />
+          <VideosList title="My Favourites!!!" list={state.favouritesList} />
         </HeaderBar>
       </div>
     </>

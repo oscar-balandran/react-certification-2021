@@ -1,19 +1,24 @@
-import React, { useContext } from 'react';
-import Button from '@material-ui/core/Button';
-import { Grid, Typography, Paper } from '@material-ui/core/';
+import React, { useContext, useState } from 'react';
+import { Grid, Typography, Paper, Button } from '@material-ui/core/';
 import AddIcon from '@material-ui/icons/Add';
 import VideosContext from '../../state/VideosContext';
 import useStyles from './VideoInfoSection.styles';
 import { useAuth } from '../../providers/Auth';
+import MessageDialog from '../MessageDialog';
 
 const VideoInfoSection = (props) => {
   const classes = useStyles();
   const { authenticated } = useAuth();
-
-  const { favouritesList, setFavouritesList } = useContext(VideosContext);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const { dispatch } = useContext(VideosContext);
 
   const handleAddFavourites = (video) => {
-    setFavouritesList([...favouritesList].concat(video));
+    dispatch({
+      type: 'ADD_FAVOURITE_VIDEO',
+      payload: { video },
+    });
+
+    setDialogOpen(true);
   };
 
   return (
@@ -26,19 +31,17 @@ const VideoInfoSection = (props) => {
                 <Typography variant="h6">{props.video.snippet.title}</Typography>
               </Grid>
               <Grid item xs={4}>
-                {
-                  (authenticated)?(
-                    <Button
-                      className={classes.addButton}
-                      onClick={() => handleAddFavourites(props.video)}
-                      startIcon={<AddIcon />}
-                    >
-                      Favourites
-                    </Button>
-                  ):(
-                    <></>
-                  )
-                }
+                {authenticated ? (
+                  <Button
+                    className={classes.addButton}
+                    onClick={() => handleAddFavourites(props.video)}
+                    startIcon={<AddIcon />}
+                  >
+                    Favourites
+                  </Button>
+                ) : (
+                  <></>
+                )}
               </Grid>
             </Grid>
           </Grid>
@@ -47,6 +50,12 @@ const VideoInfoSection = (props) => {
           </Grid>
         </Paper>
       </Grid>
+      <MessageDialog
+        title="Message"
+        message="Video added to favourites!!"
+        open={dialogOpen}
+        setDialogOpen={setDialogOpen}
+      />
     </div>
   );
 };

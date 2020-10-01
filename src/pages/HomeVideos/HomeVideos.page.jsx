@@ -1,24 +1,33 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import HeaderBar from '../../components/HeaderBar';
 import VideosList from '../../components/VideosList';
 import VideosContext from '../../state/VideosContext';
 import { useFetchVideos } from '../../utils/hooks/useFetchVideos';
 
 const VideosContent = () => {
-  const { videoList, setVideoList } = useContext(VideosContext);
+  const { state, dispatch, strSearch } = useContext(VideosContext);
 
-  const res = useFetchVideos();
+  const result = useFetchVideos();
 
-  let tmpVideos = null;
-  if (!res.response) {
-    tmpVideos = null;
+  console.log('HomeVideos:', strSearch, 'Reducer', state, 'RESULT:', result);
+
+  let fetchedVideos = null;
+  if (!result.response) {
+    console.log('HomeVideos: NO Response:', result);
+    fetchedVideos = [];
   } else {
-    tmpVideos = res.response.items;
+    console.log('HomeVideos: SI Response:', result);
+    fetchedVideos = result.response.items;
   }
 
-  setVideoList(tmpVideos);
+  useEffect(() => {
+    dispatch({
+      type: 'SET_VIDEOLIST',
+      payload: fetchedVideos,
+    });
+  }, [fetchedVideos]);
 
-  return <VideosList title="Welcome to React Challenge!!!" list={videoList} />;
+  return <VideosList title="Welcome to React Challenge!!!" list={state.videoList} />;
 };
 
 const HomeVideos = () => {
