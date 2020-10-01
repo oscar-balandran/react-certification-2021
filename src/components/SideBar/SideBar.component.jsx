@@ -6,11 +6,13 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Link } from 'react-router-dom';
 import useStyles from './SideBar.styles';
+import { useAuth } from '../../providers/Auth';
 
 const SideBar = (props) => {
   const anchor = 'left';
 
   const classes = useStyles();
+  const { authenticated } = useAuth();
 
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -33,9 +35,15 @@ const SideBar = (props) => {
           <ListItemText primary="Home" />
         </ListItem>
 
-        <ListItem button key="Favourites" component={Link} to="/favourites">
-          <ListItemText primary="Favorites" />
-        </ListItem>
+        {
+          (authenticated)?(
+            <ListItem button key="Favourites" component={Link} to="/favourites">
+              <ListItemText primary="Favorites" />
+            </ListItem>
+          ):(
+            <></>
+          )
+        }
       </List>
     </div>
   );

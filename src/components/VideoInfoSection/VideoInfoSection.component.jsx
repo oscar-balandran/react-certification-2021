@@ -4,9 +4,11 @@ import { Grid, Typography, Paper } from '@material-ui/core/';
 import AddIcon from '@material-ui/icons/Add';
 import VideosContext from '../../state/VideosContext';
 import useStyles from './VideoInfoSection.styles';
+import { useAuth } from '../../providers/Auth';
 
 const VideoInfoSection = (props) => {
   const classes = useStyles();
+  const { authenticated } = useAuth();
 
   const { favouritesList, setFavouritesList } = useContext(VideosContext);
 
@@ -24,13 +26,19 @@ const VideoInfoSection = (props) => {
                 <Typography variant="h6">{props.video.snippet.title}</Typography>
               </Grid>
               <Grid item xs={4}>
-                <Button
-                  className={classes.addButton}
-                  onClick={() => handleAddFavourites(props.video)}
-                  startIcon={<AddIcon />}
-                >
-                  Favourites
-                </Button>
+                {
+                  (authenticated)?(
+                    <Button
+                      className={classes.addButton}
+                      onClick={() => handleAddFavourites(props.video)}
+                      startIcon={<AddIcon />}
+                    >
+                      Favourites
+                    </Button>
+                  ):(
+                    <></>
+                  )
+                }
               </Grid>
             </Grid>
           </Grid>
