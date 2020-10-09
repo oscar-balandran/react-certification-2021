@@ -4,7 +4,6 @@ import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import AuthProvider from '../../providers/Auth';
 import HomeVideosPage from '../../pages/HomeVideos';
 import Favourites from '../../pages/Favorites';
-import LoginPage from '../../pages/Login';
 import NotFound from '../../pages/NotFound';
 import Layout from '../Layout';
 import VideoDetail from '../../pages/VideoDetail';
@@ -50,9 +49,6 @@ function App() {
                 <Route exact path="/video">
                   <VideoDetail />
                 </Route>
-                <Route exact path="/login">
-                  <LoginPage />
-                </Route>
                 <Route path="*">
                   <NotFound />
                 </Route>
@@ -66,3 +62,4 @@ function App() {
 }
 
 export default App;
+export { theme };

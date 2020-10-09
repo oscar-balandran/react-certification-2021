@@ -80,7 +80,7 @@ const HeaderBar = (props) => {
               <SearchIcon />
             </div>
             <InputBase
-              placeholder={strSearch || 'Search…'}
+              placeholder={strSearch || 'Search...'}
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,

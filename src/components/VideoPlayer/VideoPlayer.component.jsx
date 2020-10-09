@@ -14,6 +14,7 @@ const VideoPlayer = (props) => {
         width="100%"
         height="100%"
         className={classes.reactPlayer}
+        data-testid={`videoplayer-${videoId}`}
       />
     </div>
   );

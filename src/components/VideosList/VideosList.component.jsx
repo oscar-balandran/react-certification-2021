@@ -24,7 +24,14 @@ const VideosList = (props) => {
           alignItems="stretch"
         >
           {props.list.map((video) => (
-            <Grid item xs={12} sm={6} md={3} key={video.id.videoId}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={3}
+              key={video.id.videoId}
+              data-testid={`videoelem-${video.id.videoId}`}
+            >
               <VideoCard video={video} />
             </Grid>
           ))}

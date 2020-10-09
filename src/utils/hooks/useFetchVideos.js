@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import VideosContext from '../../state/VideosContext';
 import { API_KEY, API_URL_SEARCH } from '../apiYoutube';
 
-const maxResults = 3;
+const maxResults = 11;
 const part = 'snippet,id';
 const type = 'video';
 
